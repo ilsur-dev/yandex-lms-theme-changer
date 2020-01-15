@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Yandex Lyceum - Theme Changer
-// @version      1.0
+// @version      1.1
 // @description  Аддон для Яндекс LMS, который меняет цветовую схему сайта
 // @author       Ilsur Gilmutdinov - ilsur_dev
 // @match        *://lyceum.yandex.ru/*
@@ -34,21 +34,23 @@
 
     var darkStyle = `
     :root {
-        background-color: #0a0a0a;
+        background-color: #151515;
         --color-indicator-grey: #454647;
         --color-separator: #363738;
         --color-text-control: #e1e3e6;
         --color-text-heading: #e1e3e6;
         --color-link: #e1e3e6;
-        --color-text-main: #76787a;
-        --color-text-status: #76787a;
-        --color-background-main: #454647;
+        --color-text-main: #a0a0a0;
+        --color-text-status: #a0a0a0;
+        --color-background-main: #19191a;
         --color-background-menu: #2c2d2e;
         --color-control-outline: #454647;
         --color-background-notification-center: #2c2d2e;
         --color-comments-form-background: #2c2d2e;
         --color-background-panel: #19191a !important;
         --color-control-hover: #666;
+        --text-size-m-secondary: #a0a0a0;
+        --color-ticker: #d0d0d0;
     }
     .comments__comment_own .comments__comment-text {
         background-color: #454647;
@@ -57,6 +59,9 @@
         background-color: #19191a;
     }
     .course-card {
+        background-color: #19191a;
+    }
+    .student-profile-course-card {
         background-color: #19191a;
     }
     .Link_view_lyceum.Link_theme_normal {
@@ -144,6 +149,10 @@
     .Button2_view_lyceum.Button2_theme_normal:before {
         background-color: #e1e3e6;
     }
+    .main-nav__course-link:hover, .main-nav__course-link_active {
+        background-color: #2c2d2e;
+    }
+    .ticker__value {color: #000;}
     `;
 
     if (activeTheme === 'dark') {
