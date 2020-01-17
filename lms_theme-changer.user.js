@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Yandex Lyceum - Theme Changer
-// @version      1.1
+// @version      1.2
 // @description  Аддон для Яндекс LMS, который меняет цветовую схему сайта
 // @author       Ilsur Gilmutdinov - ilsur_dev
 // @match        *://lyceum.yandex.ru/*
@@ -14,13 +14,11 @@
 (function() {
     'use strict';
 
-
     // Доступные темы: dark; light
     var activeTheme = 'dark';
 
     // Скрыть Яндекс Чат
     var hideChat = true;
-
 
     function addGlobalStyle(css) {
         var head, style;
@@ -35,22 +33,36 @@
     var darkStyle = `
     :root {
         background-color: #151515;
-        --color-indicator-grey: #454647;
+        --color-indicator-grey: #343535;
+        --color-indicator-white: #454647;
         --color-separator: #363738;
         --color-text-control: #e1e3e6;
         --color-text-heading: #e1e3e6;
         --color-link: #e1e3e6;
         --color-text-main: #a0a0a0;
         --color-text-status: #a0a0a0;
-        --color-background-main: #19191a;
+        --color-background-main: #202020;
         --color-background-menu: #2c2d2e;
+        --color-background-active: #151515;
         --color-control-outline: #454647;
+        --color-control-active: #3a3a3a;
         --color-background-notification-center: #2c2d2e;
         --color-comments-form-background: #2c2d2e;
-        --color-background-panel: #19191a !important;
+        --color-background-panel: #222222 !important;
         --color-control-hover: #666;
-        --text-size-m-secondary: #a0a0a0;
         --color-ticker: #d0d0d0;
+    }
+    .icon_type_signal-outline.icon_size_l {
+        background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'24'%20height%3D'24'%3E%3Cg%20fill%3D'none'%20stroke%3D'%23e1e3e6'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'M16.53%205.53a4.53%204.53%200%200%200-9.06%200v4.75l-5.18%209h19.42l-5.18-9z'%20stroke-linecap%3D'round'%2F%3E%3Cpath%20d%3D'M10.17%2019.36v1.81a1.83%201.83%200%200%200%203.66%200v-1.81'%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+    }
+    .icon_type_arrow-short.icon_size_s {
+        background-image: url("data:image/svg+xml,%3Csvg%20width%3D'16'%20height%3D'16'%20fill%3D'none'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%3E%3Cpath%20d%3D'M8%209.585l4.793-4.79a1%201%200%200%201%201.414%201.415l-5.5%205.496a1%201%200%200%201-1.414%200l-5.5-5.496a1%201%200%200%201%201.414-1.415L8%209.585z'%20fill%3D'%23e1e3e6'%2F%3E%3C%2Fsvg%3E");
+    }
+    .icon_type_arrow-dropdown.icon_size_xs {
+        background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M0-2h10V8H0z'/%3E%3Cpath fill='%23e1e3e6' d='M10 0H0l5 6z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .Button2_view_default.Button2_tone_default.Button2_theme_pseudo:before {
+        border-color: rgba(255, 255, 255, 0.3);
     }
     .comments__comment_own .comments__comment-text {
         background-color: #454647;
@@ -146,6 +158,9 @@
     .mtk14 {color: #14b38e !important;}
     .mtk23 {color: #008acc !important;}
 
+    .monaco-editor .line-numbers {color: #808080 !important;}
+    .monaco-editor .current-line ~ .line-numbers {color: #e0e0e0 !important;}
+
     .Button2_view_lyceum.Button2_theme_normal:before {
         background-color: #e1e3e6;
     }
@@ -163,4 +178,18 @@
         addGlobalStyle('.ya-chat-widget {display: none !important;}')
     }
 
+    var stat_noscript = document.createElement('noscript');
+    var stat_div = document.createElement('div');
+    var stat_img = document.createElement('img');
+    stat_img.setAttribute('src', 'https://mc.yandex.ru/watch/57064990');
+    stat_img.setAttribute('style', 'position:absolute; left:-9999px;');
+    stat_img.setAttribute('alt', '');
+    stat_div.appendChild(stat_img);
+    stat_noscript.appendChild(stat_div);
+    (document.body || document.head || document.documentElement).appendChild(stat_noscript);
 })();
+
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+   ym(57064990, "init", {clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true});
