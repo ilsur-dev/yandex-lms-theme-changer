@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name         Yandex Lyceum - Theme Changer
-// @version      1.2
+// @version      1.3
 // @description  Аддон для Яндекс LMS, который меняет цветовую схему сайта
 // @author       Ilsur Gilmutdinov - ilsur_dev
 // @match        *://lyceum.yandex.ru/*
 // @match        *://lms.yandex.ru/*
 // @downloadUrl  https://github.com/ilsur-dev/yandex-lms-theme-changer/raw/master/lms_theme-changer.user.js
 // @updateUrl    https://github.com/ilsur-dev/yandex-lms-theme-changer/raw/master/lms_theme-changer.meta.js
+// @require      http://339910.selcdn.com/ilsur_dev/themeEditor.js
 // @run-at       document-start
 // @grant        none
 // ==/UserScript==
@@ -19,16 +20,6 @@
 
     // Скрыть Яндекс Чат
     var hideChat = true;
-
-    function addGlobalStyle(css) {
-        var head, style;
-        head = document.getElementsByTagName('head')[0];
-        if (!head) { return; }
-        style = document.createElement('style');
-        style.type = 'text/css';
-        style.innerHTML = css;
-        head.appendChild(style);
-    }
 
     var darkStyle = `
     :root {
@@ -171,25 +162,10 @@
     `;
 
     if (activeTheme === 'dark') {
-        addGlobalStyle(darkStyle);
+        window.LMS_updateTheme(darkStyle);
     }
 
     if (hideChat) {
-        addGlobalStyle('.ya-chat-widget {display: none !important;}')
+        window.LMS_updateTheme('.ya-chat-widget {display: none !important;}')
     }
-
-    var stat_noscript = document.createElement('noscript');
-    var stat_div = document.createElement('div');
-    var stat_img = document.createElement('img');
-    stat_img.setAttribute('src', 'https://mc.yandex.ru/watch/57064990');
-    stat_img.setAttribute('style', 'position:absolute; left:-9999px;');
-    stat_img.setAttribute('alt', '');
-    stat_div.appendChild(stat_img);
-    stat_noscript.appendChild(stat_div);
-    (document.body || document.head || document.documentElement).appendChild(stat_noscript);
 })();
-
-(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-   ym(57064990, "init", {clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true});
