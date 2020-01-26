@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Yandex Lyceum - Theme Changer
-// @version      1.3
+// @version      1.4
 // @description  Аддон для Яндекс LMS, который меняет цветовую схему сайта
 // @author       Ilsur Gilmutdinov - ilsur_dev
 // @match        *://lyceum.yandex.ru/*
