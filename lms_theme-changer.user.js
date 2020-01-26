@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Yandex Lyceum - Theme Changer
-// @version      1.3
+// @version      1.4
 // @description  Аддон для Яндекс LMS, который меняет цветовую схему сайта
 // @author       Ilsur Gilmutdinov - ilsur_dev
 // @match        *://lyceum.yandex.ru/*
@@ -21,6 +21,9 @@
     // Скрыть Яндекс Чат
     var hideChat = true;
 
+    // Кастомный стиль скроллбаров на странице
+    var custom_scrollbar = true;
+
     var darkStyle = `
     :root {
         background-color: #151515;
@@ -35,6 +38,7 @@
         --color-background-main: #202020;
         --color-background-menu: #2c2d2e;
         --color-background-active: #151515;
+        --color-status-active: #151515;
         --color-control-outline: #454647;
         --color-control-active: #3a3a3a;
         --color-background-notification-center: #2c2d2e;
@@ -51,6 +55,12 @@
     }
     .icon_type_arrow-dropdown.icon_size_xs {
         background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M0-2h10V8H0z'/%3E%3Cpath fill='%23e1e3e6' d='M10 0H0l5 6z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    .icon_type_remove.icon_size_xs {
+        background-image: url("data:image/svg+xml,%3Csvg%20width%3D'10'%20height%3D'10'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%3E%3Cpath%20d%3D'M5%204.396L.605%200%200%20.603%204.397%205%200%209.396.605%2010%205%205.603%209.396%2010%2010%209.396%205.604%205%2010%20.603%209.396%200z'%20fill-rule%3D'evenodd'%20fill%3D'%23e1e3e6'%2F%3E%3C%2Fsvg%3E")
+    }
+    .icon_type_remove-all.icon_size_l {
+        background-image: url("data:image/svg+xml,%3Csvg%20width%3D'20'%20height%3D'14'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%3E%3Cg%20fill%3D'none'%20fill-rule%3D'evenodd'%3E%3Cpath%20d%3D'M-4-5h24v24H-4z'%2F%3E%3Cpath%20d%3D'M0%202V0h15v2H0zm0%206V6h8v2H0zm0%206v-2h8v2H0z'%20fill%3D'%23e1e3e6'%20fill-rule%3D'nonzero'%2F%3E%3Cpath%20fill-rule%3D'nonzero'%20d%3D'M15%208.517L11.484%205%2011%205.482%2014.518%209%2011%2012.517l.484.483L15%209.482%2018.517%2013l.483-.483L15.483%209%2019%205.482%2018.517%205z'%20fill%3D'%23000'%20stroke%3D'%23e1e3e6'%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E")
     }
     .Button2_view_default.Button2_tone_default.Button2_theme_pseudo:before {
         border-color: rgba(255, 255, 255, 0.3);
@@ -161,8 +171,29 @@
     .ticker__value {color: #000;}
     `;
 
+    var scrollbarStyle = `
+    ::-webkit-scrollbar {
+        width: 13px;
+    }
+
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 14px 14px transparent;
+        border: solid 4px transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        box-shadow: inset 0 0 14px 14px #a0a0a0;
+        border: solid 4px transparent;
+        border-radius: 15px;
+    }
+    `;
+
     if (activeTheme === 'dark') {
         window.LMS_updateTheme(darkStyle);
+    }
+
+    if (custom_scrollbar) {
+        window.LMS_updateTheme(scrollbarStyle);
     }
 
     if (hideChat) {
